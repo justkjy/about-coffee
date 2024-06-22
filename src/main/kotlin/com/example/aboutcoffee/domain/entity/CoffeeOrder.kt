@@ -5,7 +5,7 @@ import jakarta.persistence.*
 @Entity
 class CoffeeOrder (
     orderNumber: String, // 주문 그룹
-    coffeeId :Long,
+    coffeeCode :Long,
     coffeeName :String,
     quantity: Int // 갯수
 
@@ -18,8 +18,8 @@ class CoffeeOrder (
     @Column(name = "order_number")
     var orderNumber: String = orderNumber
 
-    @Column(name = "coffee_id")
-    var coffeeId : Long? = coffeeId
+    @Column(name = "coffee_code")
+    var coffeeCode : Long? = coffeeCode
 
     @Column(name = "coffee_name")
     var coffeeName: String = coffeeName
