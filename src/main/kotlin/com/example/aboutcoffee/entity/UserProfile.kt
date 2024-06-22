@@ -7,16 +7,24 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 
 @Entity
-class UserProfile :BaseEntity() {
+class UserProfile(
+
+    name:String = "",
+
+    email:String = "",
+
+    pictureUrl:String = "",
+
+) :BaseEntity() {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "profile_id")
     var id: Long? = null
 
-    var name: String? = null
+    var name: String? = name
 
-    var email: String? = null
+    var email: String? = email
 
-    var pictureUrl: String? = null
+    var pictureUrl: String? = pictureUrl
 }
