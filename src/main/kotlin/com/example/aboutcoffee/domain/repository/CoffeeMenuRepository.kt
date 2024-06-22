@@ -1,6 +1,6 @@
-package com.example.aboutcoffee.repository
+package com.example.aboutcoffee.domain.repository
 
-import com.example.aboutcoffee.entity.CoffeeMenu
+import com.example.aboutcoffee.domain.entity.CoffeeMenu
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface CoffeeMenuRepository : JpaRepository<CoffeeMenu, Long> {

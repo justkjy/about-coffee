@@ -1,6 +1,6 @@
-package com.example.aboutcoffee.entity
+package com.example.aboutcoffee.domain.entity
 
-import com.example.aboutcoffee.constant.CoffeeType
+import com.example.aboutcoffee.domain.constant.CoffeeType
 import jakarta.persistence.*
 
 @Entity
