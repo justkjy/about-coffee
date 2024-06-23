@@ -5,8 +5,11 @@ import jakarta.persistence.*
 @Entity
 class CoffeeOrder (
     orderNumber: String, // 주문 그룹
+
     coffeeCode :Long,
+
     coffeeName :String,
+
     quantity: Int // 갯수
 
 ): BaseEntity() {
@@ -26,4 +29,7 @@ class CoffeeOrder (
 
     @Column(name = "quantity")
     var quantity: Int = quantity
+
+    @Column(name = "order_completed")
+    var orderCompleted : Boolean = false
 }
