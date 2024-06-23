@@ -2,6 +2,7 @@ package com.example.aboutcoffee.domain
 
 import com.example.aboutcoffee.domain.constant.CoffeeType
 import com.example.aboutcoffee.domain.entity.CoffeeMenu
+import com.example.aboutcoffee.domain.entity.UserProfile
 import com.example.aboutcoffee.domain.repository.CoffeeMenuRepository
 import com.example.aboutcoffee.domain.repository.CoffeeOrderRepository
 import com.example.aboutcoffee.domain.repository.UserProfileRepository
@@ -22,6 +23,26 @@ class DataInitializer(
         // 아래 문 사용하면 느려짐
         println("스프링이 실행되었습니다. 테스트 데이터를 초기화 합니다. ")
 
+        val profiles = mutableListOf(
+            UserProfile(
+                "Just Kim",
+                "mysterykjy@gmail.com",
+                "https://instagram.ficn1-1.fna.fbcdn.net/v/t51.2885-19/23099069_195718670973126_7334966395312013312_n.jpg?_nc_ht=instagram.ficn1-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=YJOEF-P_-cIQ7kNvgG1veZ0&edm=AEhyXUkBAAAA&ccb=7-5&oh=00_AYCWeDqgScUarx-k7gis2FbBvNB-EEtVISMRoCRPuaZGug&oe=667DA4C0&_nc_sid=cf751b"
+            ),
+            UserProfile(
+                "don lee",
+                "donlee@gmail.com",
+                "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDA0MDdfNjEg%2FMDAxNzEyNDU4NjU2MjA1.nz1m4Lz4G3pfsJkthjdto_Q4AhmPftf2gc0OCgD4vWYg.lJ1r4_DEt3Ur7dsSl3Toa_78Efb25CIjdmQKNGdbPNQg.JPEG%2FpekDn%25A3%25DF5c.jpg&type=sc960_832"
+            ),
+            UserProfile(
+                "wrestler_nam",
+                "kyungjin@gmail.com",
+                "https://www.instagram.com/p/C7oLn5DRImm/"
+            )
+        )
+        userProfileRepository.saveAll(profiles)
+
+
         val coffeeMenus = mutableListOf(
             CoffeeMenu(
                 coffeeCode = 0,
@@ -41,7 +62,7 @@ class DataInitializer(
                 coffeeImgUrl = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDA1MjNfMjc1%2FMDAxNzE2NDUxMDcxNzk4.klQRE6A_p_QA2Hj8mtMXN9b0gFqMGSvRXnqxbz0o6TAg.YxSpagNKyuibgKzIF1CyPqNuWE98tfOsz6L7RK6himkg.JPEG%2FIMG_8841.jpeg&type=sc960_832",
                 coffeeDescription = "아주 진한 이탈리아식 커피이다. 데미타세(demitasse)라는 조그만 잔에 담아서 마셔야 제맛을 느낄 수 있다. 높은 압력으로 짧은 순간에 커피를 추출하기 때문에 카페인의 양이 적고, 커피의 순수한 맛을 느낄 수 있다. 에스프레소(Espresso)의 영어식 표기인 '익스프레스(express)'는 '빠르다'라는 의미로 사용된다.",
                 coffeePrice = 1800,
-                userProfileId = 0
+                userProfileId = 1
             ),
 
             CoffeeMenu(
@@ -52,7 +73,7 @@ class DataInitializer(
                         "\n" +
                         "라테를 만들 때에는 마무리로 우유 거품을 살짝 얹는 것이 좋다. 거품이 뚜껑 역할을 해서 온도가 떨어지는 것을 막아주기 때문이다. 하지만 자칫 거품이 두껍게 올라가면 카푸치노처럼 보일 수 있으니 얇은 뚜껑을 덮어 준다는 기분으로 살짝 얹으면 된다.",
                 coffeePrice = 3000,
-                userProfileId = 0
+                userProfileId = 2
             )
         )
 
