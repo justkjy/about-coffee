@@ -6,9 +6,9 @@ import jakarta.persistence.*
 
 @Entity
 class CoffeeMenu(
-    coffeeCode: Int,
+    coffeeCode: String = "",
     category: CoffeeType? = null,
-    coffeeName: String,
+    coffeeName: String="",
     coffeeImgUrl: String = "",
     coffeeDescription: String = "",
     coffeePrice: Long? = null,
@@ -20,7 +20,7 @@ class CoffeeMenu(
     var id: Long? = null
 
     @Column(name = "coffee_code")
-    var coffeeCode: Int = coffeeCode
+    var coffeeCode: String = coffeeCode
 
     @Column(name = "coffee_type")
     var category : CoffeeType? = category

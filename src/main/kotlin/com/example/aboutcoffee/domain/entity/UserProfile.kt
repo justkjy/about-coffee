@@ -26,5 +26,6 @@ class UserProfile(
 
     var email: String? = email
 
+    @Column(name = "picture_url", length = 500)
     var pictureUrl: String? = pictureUrl
 }
