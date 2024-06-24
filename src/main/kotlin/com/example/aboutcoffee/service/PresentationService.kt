@@ -37,6 +37,11 @@ private val presentationRepository: PresentationRepository) {
                     this.coffeeImgUrl = menu.coffeeImgUrl
                     this.userProfileId = menu.userProfileId
                 }
+                //////////////////////////////////////////////////////////////////
+                // 여기 ///////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////
+                // 왜 저장이 되지 않는지 모르겠음 //////////////////////////////////////
+                //////////////////////////////////////////////////////////////////
                 resultMenu = presentationRepository.coffeeMenuSave(menuSave)
                 val menuAll = presentationRepository.getCoffeeMenu()
                 println(menuAll)

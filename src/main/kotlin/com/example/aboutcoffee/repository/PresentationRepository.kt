@@ -23,19 +23,20 @@ class PresentationRepository(
     }
 
     // 작성자 커피 정보 제출
-    fun getCoffeeMenuByProfileIdOrProfileInf(
+    // 커피 검색시에 이름과 이메일로 검색하려면 profileId는 null, profileId로 조회 하려면 profileId에 값을 등록
+    fun getCoffeeMenuByProfileIdOrProfileInfo(
         profileId : Long? = null,
         profileName: String? = null,
         profileEmail: String? = null
     ) : List<CoffeeMenu>? {
+        // 커피 코드로 검색
         return profileId?.let {
-            val isId = getIsUseById(profileId)
             var menu : List<CoffeeMenu>? = null
-            if( isId) {
+            if( getIsUseById(profileId)) {
                 menu = coffeeMenuRepository.findByUserProfileId(profileId)
             }
             menu
-        } ?: kotlin.run {
+        } ?: kotlin.run { // 커피 이름과 이메일로 검색
             var menu : List<CoffeeMenu>? = null
             profileName?.let{
                 profileEmail?.let{
@@ -62,9 +63,7 @@ class PresentationRepository(
 
     fun coffeeMenuUpdate(coffeeMenu: CoffeeMenu): CoffeeMenu? {
         return coffeeMenu.id?.let {
-
             coffeeMenuRepository.save(coffeeMenu)
-
         } ?: kotlin.run {
             null
         }
@@ -82,7 +81,6 @@ class PresentationRepository(
         email : String
     ): Long? {
         val id = userProfileRepository.findByNameIgnoreCaseAndEmailIgnoreCase(name, email).first().id ?: return null
-
         return id
     }
 
