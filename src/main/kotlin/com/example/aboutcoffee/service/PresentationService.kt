@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional
 
 
 @Service
-@Transactional(readOnly = true)
 class PresentationService(
 private val presentationRepository: PresentationRepository) {
 
@@ -53,11 +52,19 @@ private val presentationRepository: PresentationRepository) {
 
     }
 
-/*    @Transactional
-    fun CoffeeMenuDelete(id: Long) : Boolean {
-        return true
+    fun coffeeMenuSearch(coffeeCode: String): List<CoffeeMenu>? {
+        return presentationRepository.getCoffeeMenuByCoffeeCode(coffeeCode)
+    }
+
+    fun coffeeMenu() : List<CoffeeMenu> {
+        return presentationRepository.getCoffeeMenu()
     }
 
     @Transactional
-    fun ProfileSave(profile: UserProfile):Profile {}*/
+    fun coffeeMenuDelete(coffeeCode: String)  {
+        presentationRepository.coffeeMenuDelete(coffeeCode)
+    }
+
+    //@Transactional
+    //fun ProfileSave(profile: UserProfile):Profile {}*/
 }

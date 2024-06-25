@@ -1,7 +1,7 @@
 package com.example.aboutcoffee.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import jakarta.persistence.Column
+
 
 data class CoffeeOrderDTO(
     var id: Long? = null,
