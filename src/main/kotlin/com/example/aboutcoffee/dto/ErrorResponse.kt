@@ -3,7 +3,7 @@ package com.example.aboutcoffee.dto
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.LocalDateTime
 
-data class ErrorResponse {
+data class ErrorResponse (
     @field:JsonProperty("result_code")
     var resultCode: String?= null,
 
@@ -20,7 +20,7 @@ data class ErrorResponse {
     var timestamp: LocalDateTime?=null,
 
     var errors: MutableList<Error>?= mutableListOf()
-}
+)
 
 data class Error(
     var field: String? = null,
