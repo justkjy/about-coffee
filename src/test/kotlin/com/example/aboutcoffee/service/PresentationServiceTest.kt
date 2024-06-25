@@ -12,6 +12,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.http.MediaType
+import org.springframework.test.annotation.Rollback
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
@@ -26,6 +27,7 @@ class PresentationServiceTest{
     lateinit var presentationRepository: PresentationRepository
 
 
+    @Rollback(false)
     @Test
     fun insertMenuTest() {
         val coffeeMenuDto = CoffeeMenuDTO(

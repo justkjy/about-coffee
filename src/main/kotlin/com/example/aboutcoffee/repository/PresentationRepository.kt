@@ -17,10 +17,6 @@ class PresentationRepository(
 ) {
 
     // CoffeeMenuRepository ///////////////////////////////
-    // 케피 정보 모두 제출
-    fun getCoffeeMenu() : List<CoffeeMenu> {
-        return coffeeMenuRepository.findAll()
-    }
 
     // 작성자 커피 정보 제출
     // 커피 검색시에 이름과 이메일로 검색하려면 profileId는 null, profileId로 조회 하려면 profileId에 값을 등록
@@ -50,9 +46,14 @@ class PresentationRepository(
         }
     }
 
+    // 케피 정보 모두 제출
+    fun getCoffeeMenu() : List<CoffeeMenu> {
+        return coffeeMenuRepository.findAll()
+    }
+
     // 커피 코드로 커피 정보 제출
     fun getCoffeeMenuByCoffeeCode(coffeeCode: String) : List<CoffeeMenu>? {
-        val coffeeMenu = coffeeMenuRepository.findByCoffeeCode(coffeeCode)
+        val coffeeMenu = coffeeMenuRepository.findAllByCoffeeCodeContainingIgnoreCase(coffeeCode)
         return coffeeMenu
     }
 
@@ -67,7 +68,10 @@ class PresentationRepository(
         } ?: kotlin.run {
             null
         }
+    }
 
+    fun coffeeMenuDelete(coffeeCode: String) {
+        return coffeeMenuRepository.deleteByCoffeeCodeIgnoreCase(coffeeCode)
     }
     // UserProfileRepository ///////////////////////////////////////////////////////////
     // 등록자 모든 정보 획득

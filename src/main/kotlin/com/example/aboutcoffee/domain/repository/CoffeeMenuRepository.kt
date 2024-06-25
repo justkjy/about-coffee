@@ -12,6 +12,8 @@ interface CoffeeMenuRepository : JpaRepository<CoffeeMenu, Long> {
     fun findByUserProfileId(userId: Long): List<CoffeeMenu>
 
     // 커피코드별 커피 정보
-    fun findByCoffeeCode(coffeeCode: String): List<CoffeeMenu>?
+    fun findAllByCoffeeCodeContainingIgnoreCase(coffeeCode: String): List<CoffeeMenu>
 
+    // 커피 메뉴 삭제
+    fun deleteByCoffeeCodeIgnoreCase(coffeeCode: String)
 }
