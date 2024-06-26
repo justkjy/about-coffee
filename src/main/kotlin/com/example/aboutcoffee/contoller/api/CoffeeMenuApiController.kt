@@ -4,8 +4,11 @@ import com.example.aboutcoffee.domain.entity.CoffeeMenu
 import com.example.aboutcoffee.dto.CoffeeMenuDTO
 import com.example.aboutcoffee.service.PresentationService
 import jakarta.validation.Valid
+import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+
 
 @RestController
 @RequestMapping("/api/coffee")
@@ -44,13 +47,20 @@ class CoffeeMenuApiController(
 
     @DeleteMapping("delete/{coffee_code}")
     fun deleteCoffeeMenu(
+        @Valid
         @PathVariable (value="coffee_code") coffeeCode: String
-    ) : Boolean {
+    ) : Any? {
+        return try {
+            when (presentationService.coffeeMenuSearch(coffeeCode)?.isNotEmpty() ?: false) {
+                true -> {
+                    presentationService.coffeeMenuDelete(coffeeCode)
+                    ResponseEntity.ok("삭제 완료")
+                }
 
-        presentationService.coffeeMenuDelete(coffeeCode.uppercase())
-        return presentationService.coffeeMenuSearch(coffeeCode)?.isEmpty() ?: false
+                else -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("${coffeeCode}가 없습니다.")
+            }
+        } catch (e: Exception) {
+            ResponseEntity.badRequest().body("요청이 잘못되었습니다.")
+        }
     }
-
-
-
 }

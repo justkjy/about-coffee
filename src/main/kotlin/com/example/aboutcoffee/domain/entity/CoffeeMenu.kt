@@ -2,12 +2,13 @@ package com.example.aboutcoffee.domain.entity
 
 import com.example.aboutcoffee.domain.constant.CoffeeType
 import jakarta.persistence.*
+import java.util.*
 
 
 @Entity
 class CoffeeMenu(
     coffeeCode: String = "",
-    category: CoffeeType? = null,
+    category: String? = null,
     coffeeName: String="",
     coffeeImgUrl: String = "",
     coffeeDescription: String = "",
@@ -23,7 +24,10 @@ class CoffeeMenu(
     var coffeeCode: String = coffeeCode
 
     @Column(name = "coffee_type")
-    var category : CoffeeType? = category
+    @Enumerated(EnumType.STRING)
+    var category:CoffeeType? = category?.let {
+            CoffeeType.valueOf(it.uppercase(Locale.getDefault()))
+    }
 
     @Column(name = "coffee_name")
     var coffeeName: String = coffeeName

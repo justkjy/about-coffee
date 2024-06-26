@@ -32,14 +32,12 @@ class PresentationRepository(
                 menu = coffeeMenuRepository.findByUserProfileId(profileId)
             }
             menu
-        } ?: kotlin.run { // 커피 이름과 이메일로 검색
+        } ?: kotlin.run{ // 커피 이름과 이메일로 검색
             var menu : List<CoffeeMenu>? = null
-            profileName?.let{
-                profileEmail?.let{
-                    val id = getUserProfileIdByNameAndEmail(profileName, profileEmail)
-                    id?.let {
-                        menu = coffeeMenuRepository.findByUserProfileId(id)
-                    }
+            if(!(profileName.isNullOrEmpty() || profileEmail.isNullOrEmpty())) {
+                getUserProfileIdByNameAndEmail(profileName, profileEmail)?.run {
+                    if(this.isNotEmpty())
+                    menu = coffeeMenuRepository.findByUserProfileId(this.first().id!!)
                 }
             }
             menu
@@ -83,14 +81,27 @@ class PresentationRepository(
     fun getUserProfileIdByNameAndEmail(
         name : String,
         email : String
-    ): Long? {
-        val id = userProfileRepository.findByNameIgnoreCaseAndEmailIgnoreCase(name, email).first().id ?: return null
-        return id
+    ): List<UserProfile>? {
+        return userProfileRepository.findByNameIgnoreCaseAndEmailIgnoreCase(name, email)
     }
 
     // 등록자 정보 id 존재 여부 확인
     fun getIsUseById(id: Long) : Boolean {
         userProfileRepository.findAllById(id).first().id?: return false
         return true
+    }
+
+    // 등록 정보 저장
+    fun userProfileSave(userProfile: UserProfile): UserProfile? {
+        return userProfileRepository.save(userProfile)
+    }
+
+    // 등록 정보 업데이트
+    fun userProfileUpdate(userProfile: UserProfile): UserProfile? {
+        return userProfile.id?.let {
+            userProfileRepository.save(userProfile)
+        } ?: kotlin.run {
+            null
+        }
     }
 }

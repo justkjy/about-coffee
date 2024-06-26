@@ -2,11 +2,14 @@ package com.example.aboutcoffee.service
 
 
 import com.example.aboutcoffee.domain.entity.CoffeeMenu
+import com.example.aboutcoffee.domain.entity.UserProfile
 import com.example.aboutcoffee.domain.repository.CoffeeMenuRepository
 import com.example.aboutcoffee.domain.repository.CoffeeOrderRepository
 import com.example.aboutcoffee.domain.repository.UserProfileRepository
 import com.example.aboutcoffee.dto.CoffeeMenuDTO
+import com.example.aboutcoffee.dto.UserProfileDTO
 import com.example.aboutcoffee.dto.toCoffeeMenu
+import com.example.aboutcoffee.dto.toUserProfile
 import com.example.aboutcoffee.repository.PresentationRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -65,6 +68,19 @@ private val presentationRepository: PresentationRepository) {
         presentationRepository.coffeeMenuDelete(coffeeCode)
     }
 
-    //@Transactional
-    //fun ProfileSave(profile: UserProfile):Profile {}*/
+    @Transactional
+    fun profileSave(userProfileDTO: UserProfileDTO): UserProfile? {
+        val userProfile = userProfileDTO.toUserProfile()
+        return userProfile.id?.let {
+            UserProfile()
+        } ?: kotlin.run {
+            presentationRepository.userProfileSave(userProfile)
+        }
+    }
+
+    fun userProfileSearch(name: String, email: String): List<UserProfile>? {
+        return presentationRepository.getUserProfileIdByNameAndEmail(name, email)
+    }
+
+
 }

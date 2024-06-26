@@ -22,9 +22,9 @@ class UserProfile(
     @Column(name = "profile_id")
     var id: Long? = null
 
-    var name: String? = name
+    var name: String = name
 
-    var email: String? = email
+    var email: String = email
 
     @Column(name = "picture_url", length = 500)
     var pictureUrl: String? = pictureUrl
