@@ -3,6 +3,8 @@ package com.example.aboutcoffee.contoller.api
 import com.example.aboutcoffee.domain.entity.CoffeeMenu
 import com.example.aboutcoffee.dto.CoffeeMenuDTO
 import com.example.aboutcoffee.service.PresentationService
+import jakarta.validation.Valid
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -11,17 +13,22 @@ class CoffeeMenuApiController(
     private val presentationService: PresentationService
 ) {
     @PostMapping("")
-    fun createMenu(@RequestBody menuDto: CoffeeMenuDTO) :String {
+    fun createMenu(
+        @Valid
+        @RequestBody menuDto: CoffeeMenuDTO
+    ) : ResponseEntity<String> {
+        if(menuDto.coffeeCode.isEmpty())
+            return ResponseEntity.badRequest().body("Coffee Menu can't be empty")
         val isNewMenu = presentationService.coffeeMenuSearch(menuDto.coffeeCode)?.isEmpty() ?: false
         return if(isNewMenu) {
             menuDto.apply {
                 this.coffeeCode = this.coffeeCode.uppercase()
             }
             presentationService.coffeeMenuSave(menuDto)?.run {
-                "저장 완료"
-            } ?: "저장 실패"
+                ResponseEntity.ok("저장완료")
+            } ?: ResponseEntity.status(500).body("저장 실패")
         } else {
-            "이미 사용중인 코드"  // 이미등록된 코드
+            ResponseEntity.ok("이미 사용중인 코드")
         }
     }
 
@@ -43,6 +50,7 @@ class CoffeeMenuApiController(
         presentationService.coffeeMenuDelete(coffeeCode.uppercase())
         return presentationService.coffeeMenuSearch(coffeeCode)?.isEmpty() ?: false
     }
+
 
 
 }
