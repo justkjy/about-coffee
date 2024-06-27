@@ -63,4 +63,5 @@ class CoffeeMenuApiController(
             ResponseEntity.badRequest().body("요청이 잘못되었습니다.")
         }
     }
+
 }

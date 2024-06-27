@@ -21,7 +21,7 @@ class PresentationRepository(
     // 작성자 커피 정보 제출
     // 커피 검색시에 이름과 이메일로 검색하려면 profileId는 null, profileId로 조회 하려면 profileId에 값을 등록
     fun getCoffeeMenuByProfileIdOrProfileInfo(
-        profileId : Long? = null,
+        profileId : Int? = null,
         profileName: String? = null,
         profileEmail: String? = null
     ) : List<CoffeeMenu>? {
@@ -86,9 +86,14 @@ class PresentationRepository(
     }
 
     // 등록자 정보 id 존재 여부 확인
-    fun getIsUseById(id: Long) : Boolean {
+    fun getIsUseById(id: Int) : Boolean {
         userProfileRepository.findAllById(id).first().id?: return false
         return true
+    }
+
+    // 등록자 정보 by email
+    fun getUserProfileInfoByEmail(email:String) : List<UserProfile> {
+        return userProfileRepository.findByEmailIgnoreCase(email)
     }
 
     // 등록 정보 저장
@@ -96,6 +101,9 @@ class PresentationRepository(
         return userProfileRepository.save(userProfile)
     }
 
+    fun userProfileDelete(email: String){
+        userProfileRepository.deleteUserByEmailIgnoreCase(email)
+    }
     // 등록 정보 업데이트
     fun userProfileUpdate(userProfile: UserProfile): UserProfile? {
         return userProfile.id?.let {
@@ -104,4 +112,6 @@ class PresentationRepository(
             null
         }
     }
+
+
 }

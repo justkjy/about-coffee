@@ -9,7 +9,7 @@ interface CoffeeMenuRepository : JpaRepository<CoffeeMenu, Long> {
     // 정보가 없으면 null 아니라 빈값을 전달
 
     // 등록자별 커피 정보
-    fun findByUserProfileId(userId: Long): List<CoffeeMenu>
+    fun findByUserProfileId(userId: Int): List<CoffeeMenu>
 
     // 커피코드별 커피 정보
     fun findAllByCoffeeCodeContainingIgnoreCase(coffeeCode: String): List<CoffeeMenu>

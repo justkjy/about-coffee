@@ -8,5 +8,9 @@ interface UserProfileRepository: JpaRepository<UserProfile, Long> {
 
     fun findByNameIgnoreCaseAndEmailIgnoreCase(name: String, email:String): List<UserProfile>
 
-    fun findAllById(id : Long): List<UserProfile>
+    fun findByEmailIgnoreCase(email: String): List<UserProfile>
+
+    fun findAllById(id : Int): List<UserProfile>
+
+    fun deleteUserByEmailIgnoreCase(email: String)
 }

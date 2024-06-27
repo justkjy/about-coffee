@@ -14,13 +14,13 @@ class CoffeeMenu(
     coffeeDescription: String = "",
     coffeePrice: Long? = null,
     userProfileId: Int? = null
-) : BaseEntity() {
+) : BaseEntity(){
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "menu_id")
     var id: Long? = null
 
-    @Column(name = "coffee_code")
+    @Column(name = "coffee_code", unique = true)
     var coffeeCode: String = coffeeCode
 
     @Column(name = "coffee_type")

@@ -25,7 +25,7 @@ private val presentationRepository: PresentationRepository) {
         val menu = menuDTO.toCoffeeMenu()
 
         return presentationRepository.getCoffeeMenuByCoffeeCode(menu.coffeeCode)?.run {
-            var resultMenu : CoffeeMenu? = null
+            var resultMenu : CoffeeMenu?
             if(this.isNotEmpty())
                 resultMenu = presentationRepository.coffeeMenuUpdate(menu)
             else {
@@ -80,6 +80,15 @@ private val presentationRepository: PresentationRepository) {
 
     fun userProfileSearch(name: String, email: String): List<UserProfile>? {
         return presentationRepository.getUserProfileIdByNameAndEmail(name, email)
+    }
+
+    fun userProfileByEmail(email: String): List<UserProfile>? {
+        return presentationRepository.getUserProfileInfoByEmail(email)
+    }
+
+    @Transactional
+    fun profileDelete(email: String) {
+        presentationRepository.userProfileDelete(email)
     }
 
 

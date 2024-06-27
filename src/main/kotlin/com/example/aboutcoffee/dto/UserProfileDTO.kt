@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 
 data class UserProfileDTO(
-    var id: Long? = null,
+    var id: Int? = null,
 
     @NotBlank(message = "name is required")
     var name: String,

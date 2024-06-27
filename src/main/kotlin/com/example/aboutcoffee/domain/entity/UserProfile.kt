@@ -20,10 +20,11 @@ class UserProfile(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "profile_id")
-    var id: Long? = null
+    var id: Int? = null
 
     var name: String = name
 
+    @Column(unique = true)
     var email: String = email
 
     @Column(name = "picture_url", length = 500)
