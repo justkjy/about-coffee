@@ -16,8 +16,9 @@ import org.springframework.stereotype.Component
 class DataInitializer(
     private val coffeeMenuRepository: CoffeeMenuRepository,
     private val coffeeOrderRepository: CoffeeOrderRepository,
-    private val userProfileRepository: UserProfileRepository
-) {
+    private val userProfileRepository: UserProfileRepository,
+
+    ) {
     @PostConstruct
     fun initializeData() {
         // 아래 문 사용하면 느려짐
@@ -80,5 +81,13 @@ class DataInitializer(
         )
 
         coffeeMenuRepository.saveAll(coffeeMenus)
+
+//        val account = Account(
+//            email = "mysterykjy@gmail.com",
+//            pw = "\$2a\$10\$NhgbNwAKdE.mOy.yIyFAo.BhXq7Piw8qW/Cfa21IsouOfhn9OdUb."
+//        )
+//        accountRepository.save(account)
     }
+
+
 }

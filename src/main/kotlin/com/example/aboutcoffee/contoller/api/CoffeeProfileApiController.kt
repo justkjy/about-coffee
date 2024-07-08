@@ -1,10 +1,12 @@
 package com.example.aboutcoffee.contoller.api
 
 import com.example.aboutcoffee.domain.entity.CoffeeMenu
+import com.example.aboutcoffee.domain.entity.UserProfile
 import com.example.aboutcoffee.dto.UserProfileDTO
 import com.example.aboutcoffee.dto.toUserProfile
 import com.example.aboutcoffee.service.PresentationService
 import jakarta.validation.Valid
+import jakarta.websocket.server.PathParam
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -17,7 +19,6 @@ class CoffeeProfileApiController(
 
     @PostMapping("")
     fun createProfile(
-        @Valid
         @RequestBody profileInfoDTO : UserProfileDTO
     ) : ResponseEntity<String> {
 
@@ -45,7 +46,28 @@ class CoffeeProfileApiController(
         }
     }
 
-    @GetMapping("/{email}")
+    @RequestMapping(method = [RequestMethod.POST], path=["/PostUserLogin"])
+    fun userLogin(
+//        @RequestHeader(name = "Content-Type") contentType : String,
+        //@RequestBody profileInfoDTO : UserProfileDTO
+        @RequestBody name: String
+    ) : UserProfile {
+        println(name)
+        //println(profileInfoDTO)
+        //println("$profileInfoDTO.email, $profileInfoDTO.password")
+        return UserProfile("test", "test", "test", "test")
+    }
+
+    @GetMapping("/UserLogin/{email}/{password}")
+    fun login(
+        @PathVariable email: String,
+        @PathVariable password: String
+    ): ResponseEntity<UserProfile> {
+        println("$email, $password")
+        return ResponseEntity.ok().body(UserProfile("test", "test", "test", "test"))
+    }
+
+    @GetMapping("/delete/{email}")
     fun deleteProfile(@Valid @PathVariable email: String): ResponseEntity<String> {
         if(email.isEmpty()){
             return ResponseEntity.badRequest().body("email can't be empty")
@@ -82,4 +104,6 @@ class CoffeeProfileApiController(
             ResponseEntity.badRequest().body(null)
         }
     }
+
+
 }

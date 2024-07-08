@@ -8,15 +8,16 @@ import jakarta.validation.constraints.NotBlank
 data class UserProfileDTO(
     var id: Int? = null,
 
-    @NotBlank(message = "name is required")
-    var name: String,
+    var name: String = "",
 
     @NotBlank(message = "email is required")
     @field: Email
     var email: String,
 
     @field:JsonProperty("picture_url")
-    var pictureUrl: String? = null
+    var pictureUrl: String? = null,
+
+    var password: String = ""
 
 )
 
@@ -27,5 +28,6 @@ fun UserProfileDTO.toUserProfile() : UserProfile {
         this.email = userProfile.email
         this.pictureUrl = userProfile.pictureUrl
         this.name = userProfile.name
+        this.password = userProfile.password
     }
 }

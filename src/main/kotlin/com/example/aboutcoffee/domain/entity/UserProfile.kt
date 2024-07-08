@@ -15,6 +15,8 @@ class UserProfile(
 
     pictureUrl:String = "",
 
+    password:String = ""
+
 ) : BaseEntity() {
 
     @Id
@@ -29,4 +31,8 @@ class UserProfile(
 
     @Column(name = "picture_url", length = 500)
     var pictureUrl: String? = pictureUrl
+
+    @Column(name = "password")
+    var password: String = password
+
 }

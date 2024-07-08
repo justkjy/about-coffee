@@ -90,6 +90,4 @@ private val presentationRepository: PresentationRepository) {
     fun profileDelete(email: String) {
         presentationRepository.userProfileDelete(email)
     }
-
-
 }
