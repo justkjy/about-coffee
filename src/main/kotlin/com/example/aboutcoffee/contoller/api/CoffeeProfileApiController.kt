@@ -3,14 +3,12 @@ package com.example.aboutcoffee.contoller.api
 import com.example.aboutcoffee.domain.entity.CoffeeMenu
 import com.example.aboutcoffee.domain.entity.UserProfile
 import com.example.aboutcoffee.dto.UserProfileDTO
-import com.example.aboutcoffee.dto.toUserProfile
 import com.example.aboutcoffee.service.PresentationService
 import jakarta.validation.Valid
-import jakarta.websocket.server.PathParam
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
+@CrossOrigin(origins = ["http://client"])
 @RestController
 @RequestMapping("/api/profile")
 class CoffeeProfileApiController(
@@ -50,12 +48,29 @@ class CoffeeProfileApiController(
     fun userLogin(
 //        @RequestHeader(name = "Content-Type") contentType : String,
         //@RequestBody profileInfoDTO : UserProfileDTO
-        @RequestBody name: String
-    ) : UserProfile {
+        @RequestBody name: UserProfileDTO
+    ) : String {
+        println(name)
+        //println(profileInfoDTO)
+        //testHtml("/homepage/${name.name}/${name.email}/${name.password}")
+        welcome()
+        return "OK"
+    }
+
+    @GetMapping("welcome")
+    fun welcome() = "testpage.html"
+
+    @GetMapping("/homepage/{name}/{email}/{password}")
+    fun testHtml(
+        @PathVariable email: String,
+        @PathVariable password: String,
+        @PathVariable name: String
+
+    ) : String {
         println(name)
         //println(profileInfoDTO)
         //println("$profileInfoDTO.email, $profileInfoDTO.password")
-        return UserProfile("test", "test", "test", "test")
+        return "hello"
     }
 
     @GetMapping("/UserLogin/{email}/{password}")
